@@ -1,21 +1,23 @@
 ###### Array #########
-# append/unshift: O(n) 
+# append: O(n)
+# prepend: O(n) 
 # pop: O(1) 
 # shift: O(n)
-# random access of element (get): O(1)
-# remove at random access element: O(n)
-# set at random access element: O(n)
-# find : O(n)
+# access element: O(1)
+# insert element: O(n)
+# delete element: O(n)
+# search : O(n)
 ##### Array #########
 
 ###### Singly Linked List #########
-# append/unshift: O(1) 
+# append: O(1)
+# prepend: O(1) 
 # pop: O(n) 
 # shift: O(1)
-# random access of element: O(1)
-# remove at random access element: O(n)
-# set at random access element: O(n)
-# find : O(n)
+# access element: O(n)
+# insert element: O(1)
+# delete element: O(1)
+# search : O(n)
 ##### Singly Linked List #########
 
 

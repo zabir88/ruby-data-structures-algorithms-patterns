@@ -1,10 +1,13 @@
-require_relative '../algorithms'
+require_relative '../misc_algorithm'
 
-RSpec.describe Algorithms do
+RSpec.describe MiscAlgorithm do
+  
   describe 'find_duplicated_elements' do
-    it 'returns duplicated elements in an array' do
-      arr = [1,2,3,1,4,2]
-      expect( Algorithms.find_duplicated_elements(arr) ).to eq([1,2])
+    context 'with valid arr elements' do
+      it 'returns duplicated elements in an array' do
+        arr = [1,2,3,1,4,2]
+        expect( Algorithms.find_duplicated_elements(arr) ).to eq([1,2])
+      end
     end
   end
 
