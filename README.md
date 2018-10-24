@@ -1,1 +1,1 @@
-# Coming Soon!
+# Implementation of some common Data Structures, Algorithms and Class Patterns in Ruby. 
