@@ -4,12 +4,10 @@ module StackQueueAlgorithm
   
   def self.isBalanced(string)
     # Data Structure: Array
-    # Time Complexity: O(n^2)
+    # Time Complexity: O(n)
     # Space Complexity: O(n)
-    
     stack = []
-    string = string.split(//)
-    
+    string = string.split(//) 
     for i in 0..string.length-1
       stack << ')' if string[i] == '('
       stack << '}' if string[i] == '{'

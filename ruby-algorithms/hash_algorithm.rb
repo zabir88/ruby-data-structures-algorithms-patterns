@@ -50,4 +50,62 @@ module HashAlgorithm
     "#{new_result}: #{new_result.length}"
   end
   ################################################################
+
+  def self.giving_away_candies(t)
+    # Olivia has an array of candies. She has to give away half to her borther. Luckily she has an even number of candies. She also likes to keep all varities of candies if possible. In other words if she has several candies of 1 type she would like to give away those first. Write a function which demonstrate this situation.
+    # Data Structure: Hash Table
+    # Time complexity: O(n log n)
+    # Space complexity: O(1)
+    candies = Hash.new(0)
+    t = t.sort_by{|i| t.count(i)}.reverse 
+    t.each{|i| candies[i] += 1} )
+    total_giveaway = t.length/2
+    count_giveaway = 0
+    candies.each do |key, value|
+      if(count_giveaway < total_giveaway)   
+        if(candies[key] > 1)
+          if(candies[key] >= total_giveaway)            
+            candies[key] = candies[key] - (total_giveaway - count_giveaway)
+            count_giveaway += total_giveaway          
+          else
+            if (count_giveaway == 0)
+              count_giveaway += candies[key]
+              candies[key] = 0
+            else
+              last_value = candies[key]
+              candies[key] = candies[key] - (total_giveaway - count_giveaway)
+              count_giveaway += last_value
+            end
+          end 
+        else
+          count_giveaway += 1
+          candies[key] -= 1
+        end
+      else
+        break
+      end
+    end
+    candies.select{|key, value| candies[key] > 0}.keys
+  end
+  ################################################################
+
+  def min_flips_mono_incr(s)
+    arr = s.split(//)
+    start = arr.length/2
+    left_half = Hash.new(0)
+    right_half = Hash.new(0)
+    for i in 0..start-1
+        left_half[arr[i]] += 1
+    end
+    for i in start..arr.length-1
+        right_half[arr[i]] += 1
+    end
+    min_flip = 0
+
+    p left_half
+    p right_half
+  end
+  ################################################################
 end
+
+p HashAlgorithm.giving_away_candies([3,4,4,4,4,4,5,6,7,8])
