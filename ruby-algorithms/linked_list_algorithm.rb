@@ -1,4 +1,5 @@
 require_relative '../ruby-data-structure/singly_linked_list'
+require_relative '../ruby-data-structure/doubly_linked_list'
 require 'byebug'
 
 module LinkedListAlgorithm
@@ -32,6 +33,7 @@ module LinkedListAlgorithm
     end
     result_list.head
   end
+  ################################################################
 end
 
 p LinkedListAlgorithm.add_two_numbers_as_linked_list
