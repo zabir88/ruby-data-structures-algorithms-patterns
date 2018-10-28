@@ -54,46 +54,56 @@ module StackQueueAlgorithm
   end
   ################################################################
 
-  def self.lru_cache_get(cache, 2)
-    queue = DoublyLinkedList.new
-    capacity = 3
-
+  def self.lru_cache_get(cache, item)
+    queue = cache
+    while(queue.value != item  && queue.next != nil)
+      queue = queue.next
+    end    
+    queue.value
+    # delete the node from queue
+    # unshift node in queue
   end
   ################################################################
 
-  def self.min_in_stack
+  def self.min_in_stack(s1)
+    min = s1.pop
+    while(s1.length > 0 )
+      last = s1.pop
+      if(last < min)
+        min = last
+      end
+    end
+    min
   end
   ################################################################
 
   def self.sort_stack(s1)
+    s2 = []
     while(s1.length != 0)
-      out = s1.pop
-      s2 = []
-      if(s2.length == 0)
-        s2.append(out)
-      else
-        for i in 0..s2.length-1
-          if(out < s2[i])
-            last_one = s2.pop
-            s2.push(out)
-            s2.push(last_one)
-          else
-            s2.push(out)
-          end
-        end
+      tmp = s1.pop
+      while(s2.length != 0 && s2.last > tmp)
+        s1.push(s2.pop)
       end
+      s2.push(tmp)
     end
     s2
   end
   ################################################################
 
-  def self.queue_with_two_stacks
+  def self.queue_with_two_stacks(s1)
+    s2 = []
+    # Enqueue will be the same as push method in stack
+    # For Dequeue the stack has to be reversed and then perform pop on reversed stack
+    while(s1.length > 0)
+      last = s1.pop
+      s2.push(last)
+    end
+    s2.pop
   end
   ################################################################
 end
 
-p StackQueueAlgorithm.lru_cache_get([1,2,3], 2)
-
+p StackQueueAlgorithm.queue_with_two_stacks([23,234,324,12,34,45345,456])
 
 
 

@@ -34,6 +34,26 @@ module LinkedListAlgorithm
     result_list.head
   end
   ################################################################
+
+  def self.remove_duplicates_in_linked_list(list)
+
+  end
+  ################################################################
+
+  def self.delete_middle_node(list)
+
+  end
+  ################################################################
+
+  def self.palindrome(list)
+
+  end
+  ################################################################
+
+  def self.loop_detection()
+
+  end
+  ################################################################
 end
 
 p LinkedListAlgorithm.add_two_numbers_as_linked_list
