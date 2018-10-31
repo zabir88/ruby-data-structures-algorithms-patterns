@@ -4,7 +4,7 @@ module SearchAlgorithm
   
   def self.binary_search(arr, item)
     #Data Structure: Array
-    #Time Complexity: O(n)
+    #Time Complexity: O(logn)
     #Space Complexity: O(1)
     first = 0
     last = arr.length - 1
@@ -21,6 +21,6 @@ module SearchAlgorithm
       end
     end
   end 
-  ################################################################ => 
+  ################################################################ 
 
 end

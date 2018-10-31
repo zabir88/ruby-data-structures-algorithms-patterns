@@ -40,34 +40,6 @@ module ArrayAlgorithm
   end
   ################################################################
 
-  def self.merge_two_sorted_arrays(array1, array2)
-    # Data Structure: Arrays
-    # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    array1, array2 = array1.sort, array2.sort
-    array1_index, array2_index = 0, 0
-    result = []
-    while(array1_index < array1.length && array2_index < array2.length)
-      if (array1[array1_index] < array2[array2_index])
-        result << array1[array1_index]
-        array1_index += 1
-      else
-        result << array2[array2_index]
-        array2_index += 1
-      end
-    end
-    while( array1_index < array1.length )
-      result << array1[array1_index]
-      array1_index += 1
-    end 
-    while( array2_index < array2.length )
-      result << array2[array2_index]
-      array2_index += 1
-    end 
-    result
-  end
-  ################################################################
-
   def self.reverse_sentence(sentence)
     # Data Structure: Array
     # Time Coplexity: O(n)
