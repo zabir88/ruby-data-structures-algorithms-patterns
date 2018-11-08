@@ -30,14 +30,12 @@ module SortAlgorithm
       arr_big << arr_small[ind_small]
       ind_small += 1
     end
-
     arr_big
   end
   ################################################################
 
   def self.group_anagrams(arr)
     result = Hash.new {|h,k| h[k]=[]}
-
     for i in 0..arr.length-1
       key = arr[i].split(//).sort.join # O(nlogn)
       result[key] << arr[i]  # O(n)
@@ -45,14 +43,53 @@ module SortAlgorithm
     result.values
   end
   ################################################################
+
+  def self.sum_two_elements(arr, target)
+    # Time Complexity: O(n logn)
+    # Data Structure: Array
+    arr = arr.sort
+    low = 0
+    high = arr.length-1
+    while(low < high)
+      if( arr[low] + arr[high] > target)
+        high -= 1 
+        indices = [low, high]
+      elsif(arr[low] + arr[high] < target)
+        low += 1
+        indices = [low, high]
+      end
+
+      if(arr[low] + arr[high] == target)
+        return indices
+      end
+    end
+    return "Not Found"
+  end
+  ################################################################
+
+
+  def self.sum_three_elements(arr, target)
+    # Time Complexity: O(n^2)
+    # Data Structure: Array
+    arr = arr.sort 
+    low = 0
+    high = arr.length-1
+    while(low < high)
+      for i in low+1..high-1
+        if(arr[low] + arr[i] + arr[high] == target)
+          return [low, i, high]
+        end
+        mid = i
+      end
+      if(arr[low] + arr[mid] + arr[high] > target)
+        high -= 1
+      elsif(arr[low] + arr[mid] + arr[high] < target)
+        low += 1
+      end
+    end
+    return "Not Found"
+  end
 end
 
-p SortAlgorithm.group_anagrams(['cat', 'rat', 'act', 'art', 'tar', 'tac'])
-=begin
-Sort the words in a given sentence by length
-def sort_string(string)
-  array= string.split
-  return array.sort_by{|word| word.length}.join(" ")
-end
-puts sort_string("Sort words in a sentence")
-=end
+p SortAlgorithm.sum_three_elements([1,4,5,6,10,11], 26)
+

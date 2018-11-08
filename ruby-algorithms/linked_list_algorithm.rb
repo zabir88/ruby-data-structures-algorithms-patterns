@@ -9,11 +9,11 @@ module LinkedListAlgorithm
   # Space Complexity: O(n)
   def self.add_two_numbers_as_linked_list(l1 = SinglyLinkedList.new,l2 = SinglyLinkedList.new)
     l1.append(2)
-    l1.append(4)
-    l1.append(3)
-    l2.append(5)
-    l2.append(6)
-    l2.append(4)
+    l1.append(6)
+    l1.append(1)
+    l2.append(7)
+    l2.append(2)
+    l2.append(1)
     result_list = SinglyLinkedList.new
     length = l1.length > l2.length ? l1.length : l2.length 
     carry = 0

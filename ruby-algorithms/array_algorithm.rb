@@ -43,7 +43,7 @@ module ArrayAlgorithm
   def self.reverse_sentence(sentence)
     # Data Structure: Array
     # Time Coplexity: O(n)
-    # Space Coplexity: O(1)
+    # Space Coplexity: O(n)
     result = []
     input = sentence.split
     for i in 1..input.length
