@@ -95,20 +95,16 @@ class SinglyLinkedList
   end
 
   def get(ind)
-    if(@length > 0)
-      if(ind >= 0 && ind < @length)
-        current_node = @head
-        i = 0
-        while(i != ind)
-          current_node = current_node.next
-          i += 1
-        end
-        current_node.value
-      else
-       return  nil
+    if(ind >= 0 && ind < @length)
+      current_node = @head
+      i = 0
+      while(i != ind)
+        current_node = current_node.next
+        i += 1
       end
+      current_node.value
     else
-      return nil
+     return  nil
     end
   end
 

@@ -1,5 +1,5 @@
-require_relative '../ruby-data-structure/singly_linked_list'
-require_relative '../ruby-data-structure/doubly_linked_list'
+require '../ruby-data-structure/singly_linked_list'
+# require '../ruby-data-structure/doubly_linked_list'
 require 'byebug'
 
 module LinkedListAlgorithm
@@ -36,11 +36,23 @@ module LinkedListAlgorithm
   ################################################################
 
   def self.remove_duplicates_in_linked_list(list)
-
+    current = list.head
+    count_dups = Hash.new(0)
+    while(current.value != nil)
+      count_dzups[current.value] += 1  
+      current = current.next
+    end
+    count_dups.keys
   end
   ################################################################
 
-  def self.delete_middle_node(list)
+  def self.delete_middle_node(list, element)
+    current_node = list.head
+    while(current_node.value != element)
+      prev_node = current_node 
+      current_node = current_node.next
+    end
+    prev_node.next = current_node.next
 
   end
   ################################################################
@@ -56,5 +68,12 @@ module LinkedListAlgorithm
   ################################################################
 end
 
-p LinkedListAlgorithm.add_two_numbers_as_linked_list
+single_list = SinglyLinkedList.new
+single_list.append(1)
+single_list.append(2)
+single_list.append(3)
+single_list.append(4)
+p single_list.head
+LinkedListAlgorithm.delete_middle_node(single_list, 3)
+p single_list.head
 
