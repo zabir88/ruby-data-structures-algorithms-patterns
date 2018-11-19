@@ -98,6 +98,7 @@ class DoublyLinkedList
     if(ind >= 0 && ind < @length)
       current_node = @head
       i = 0
+      p ind
       while(i != ind)
         current_node = current_node.next
         i += 1
@@ -110,35 +111,53 @@ class DoublyLinkedList
 
   def insert(el, ind)
     node = Node.new(el)
-    if(ind >= 0 && ind < @length)
-      current_node = @head
-      i = 0
-      while(i != ind)
-        prev_node = current_node
-        current_node = current_node.next
-        i += 1
+    if(@length > 0)
+      if(ind > 0 && ind < @length)
+        current_node = @head
+        i = 0
+        while(i != ind)
+          prev_node = current_node
+          current_node = current_node.next
+          i += 1
+        end
+        node.next = current_node
+        node.prev = prev_node
+        prev_node.next = node
+        current_node.prev = node
+      elsif(ind == 0)
+        node.next = @head
+        @head.prev = node
+        @head = node 
+      else
+        raise 'Out of bound'  
       end
-      node.next = current_node
-      node.prev = prev_node
-      prev_node.next = node
-      current_node.prev = node
-      @length += 1
     else
-      raise 'Out of bound'  
+      @head = node
+      @tail = @head
     end
+    @length += 1
   end
 
   def delete(el)
     current_node = @head
-    while(current_node.value != el)
-      prev_node = current_node
-      current_node = current_node.next
-      if(current_node.next == nil)
-        raise "#{el} could not be found"
-      end
-    end 
-    current_node.next.prev = prev_node
-    prev_node.next = current_node.next
+    if(current_node.value == el)
+      @head = @head.next
+      @head.prev = nil
+    elsif(@tail.value == el)
+      @tail = @tail.prev
+      @tail.next = nil
+    else  
+      while(current_node.value != el)
+        prev_node = current_node
+        current_node = current_node.next
+        if(current_node == nil)
+          raise "#{el} could not be found"
+        end
+      end 
+      next_node = current_node.next
+      next_node.prev = prev_node
+      prev_node.next = next_node
+    end
     @length -= 1
   end
 
@@ -167,9 +186,10 @@ first = DoublyLinkedList.new
 first.append(1)
 first.append(2)
 first.append(3)
-first.insert(4, 2)
-first.delete(5)
+first.delete(2)
 p first.head
+
+
 
 
 

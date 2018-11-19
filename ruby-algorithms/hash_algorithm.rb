@@ -58,7 +58,7 @@ module HashAlgorithm
     # Space complexity: O(1)
     candies = Hash.new(0)
     t = t.sort_by{|i| t.count(i)}.reverse 
-    t.each{|i| candies[i] += 1} )
+    t.each{|i| candies[i] += 1} 
     total_giveaway = t.length/2
     count_giveaway = 0
     candies.each do |key, value|
@@ -89,23 +89,32 @@ module HashAlgorithm
   end
   ################################################################
 
-  def min_flips_mono_incr(s)
-    arr = s.split(//)
-    start = arr.length/2
-    left_half = Hash.new(0)
-    right_half = Hash.new(0)
-    for i in 0..start-1
-        left_half[arr[i]] += 1
+  def self.longest_substring(s)
+    # Data Structure: Hash Table
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    store = Hash.new
+    i, j = 0, 0
+    longest_substring = ''
+    while(i < s.length && j < s.length)
+      if(store.has_key?(s[j]) != true)
+        store[s[j]] = j
+        j += 1
+        longest_substring = s[i..j]
+      else
+        store.delete(s[i])
+        i += 1
+      end
     end
-    for i in start..arr.length-1
-        right_half[arr[i]] += 1
-    end
-    min_flip = 0
-
-    p left_half
-    p right_half
+    longest_substring
   end
   ################################################################
+
+  
+  
+
+  ################################################################
+
 end
 
-p HashAlgorithm.giving_away_candies([3,4,4,4,4,4,5,6,7,8])
+p HashAlgorithm.longest_substring("abcab")

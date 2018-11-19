@@ -13,23 +13,46 @@ module MiscAlgorithm
   end
   ################################################################
   
-  # def self.find_duplicated_hash_in_arr_provided_key(arr, key)
-  #   duplicates = Hash.new(0)
-  #   arr.each {|i| duplicates[i[key.to_sym]] += 1 }
-  #   duplicates = duplicates.select{|i| duplicates[i] > 1}.keys
-  #   # arr.each do |i|
-  #   # end
-  # end
+  def self.longest_palindromic_substring(str)
+    # Data structure: String
+    # Time complexity: O(n^3)
+    # Space complexity: O(1)
+    if(str.length > 0)
+      largest_palindrome = ''
+      i = 0
+      while(i < str.length)
+        j = str.length-1
+        while(j > i)
+          starting = i
+          ending = j
+          while(starting <= ending)
+            if(str[starting] != str[ending])
+              result = false
+              break
+            end
+            result = true
+            starting += 1
+            ending -= 1
+          end
+          if(result == true && str[i..j].length > largest_palindrome.length)
+            largest_palindrome = str[i..j]
+          end
+          j -= 1
+        end
+        i += 1
+      end
+      if(largest_palindrome == '')
+        largest_palindrome = str[0]
+      end
+    else
+      largest_palindrome = str
+    end
+    largest_palindrome
+  end
+  ################################################################
 end
 
 =begin
-
-#############################################
-#4. Select n random element from an array 
-def random_select(array, n)
-  array.sample(n)
-end
-p random_select([1,2,2,3,4], 3)
 
 ########################################
 #7. Compute sum of cubes for given range
@@ -37,18 +60,7 @@ def sum_of_cubes(a, b)
   (a..b).inject(0) {|sum, i| sum+= (i**3)} 
 end
 puts sum_of_cubes(1,3)
-######################################
 
-#9. Check if all elements in an array are Fixnum
-def array_of_fixnums?(array)
-  array.each do |i|
-    if i%1!=0
-      return false
-    end
-  end
-  return true
-end
-puts array_of_fixnums?([4,1,3,4,5])
 ########################################
 #10. Number shuffle
 def shuffle(num)
@@ -104,25 +116,6 @@ require 'prime'
 puts Prime.each(2000000).inject{|sum, i| sum+i}
 
 ####################################
-
-#24. Minimum value in an array through iteration
-def minimum_value(arr)
-  if arr.length <= 1
-    return arr[0]
-  else
-    min=arr[0]
-    arr.map.with_index{|i , j| min=arr[j] if arr[j] <= min }     
-  end
-  return min
-end
-p minimum_value([-12,34,2,3,0])
-####################################
-#25. Capitalization using iteration
-def capitalize_words(string)
-  string.split.map{|i| [i[0].upcase, i[1..-1]].join}
-end
-p capitalize_words('foo asdfa kldfm')
-####################################
 #26. Median of an array
 def median(arr)
   arr= arr.sort
@@ -162,27 +155,6 @@ p match_index([0,7,1,4,3,2,3])
 end_time=Time.now
 puts "#{(end_time-begin_time)*1000} miliseconds"
 ###################################
-
-def paranthesis_matcher(str)
-  split_str=str.split(//)
-  if (split_str[0]== "(") && (split_str[-1]== "(") || (split_str[0]==")" && split_str[0]==")") || (split_str[0]==")" && split_str[0]=="(")   
-    return false
-  else
-    if split_str.count("(") == split_str.count(")")
-      split_str[1..-2].each do |i|
-        if (i[j-1] != i[j+1])
-          return true
-        else
-          return false  
-        end 
-      end
-    else
-      return false
-    end 
-  end
-end
-puts paranthesis_matcher("((12)))(")
-############################################
 
 def digits_to_roman(multiplier)
   return "No zeros" if mulitplier == 0

@@ -46,7 +46,6 @@ module SearchAlgorithm
           left -= 1
         end
       end
-      
       if(el > arr[mid])
         first = mid + 1
       elsif(el < arr[mid])

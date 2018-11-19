@@ -121,14 +121,11 @@ class SinglyLinkedList
         end
         node.next = current_node
         previous_node.next = node
-        @length += 1
       elsif (ind == 0)
         node.next = @head
-        @head = node
-      elsif(ind < 0)
-        return nil
-      elsif (ind >= @length )
-        raise 'index must be smaller than length of list'
+        @head = node 
+      else
+        raise 'Out of bound'
       end
     else
       @head = node
@@ -138,20 +135,27 @@ class SinglyLinkedList
   end
 
   def delete(item)
-    if(@length > 1 )
-      current_node = @head
+    current_node = @head
+    if(current_node.value == item)
+      @head = @head.next
+    elsif(@tail.value == item)
+      while(current_node.next != nil)
+        prev_node = current_node
+        current_node = current_node.next
+      end
+      prev_node.next = nil
+      @tail = prev_node 
+    else
       while(current_node.value != item)
         previous_node = current_node
         current_node = current_node.next
+        if(current_node == nil)
+          raise "#{item} could not be found"
+        end
       end
       previous_node.next = current_node.next
-      @length -= 1
-    elsif(@length == 1)
-      @head = nil
-      @tail = @head
-    else
-      return nil
-    end
+    end 
+    @length -= 1
   end
 
   def search(item)
@@ -177,12 +181,12 @@ class SinglyLinkedList
       current_node = next_node
     end
     @head = prev_node
-    find_tail = @head
-    while(find_tail != nil)
-      second_last_node = find_tail 
-      find_tail = find_tail.next
-    end
-    @tail = second_last_node
+    # find_tail = @head
+    # while(find_tail != nil)
+    #   second_last_node = find_tail 
+    #   find_tail = find_tail.next
+    # end
+    # @tail = second_last_node
   end
 
   def is_empty?

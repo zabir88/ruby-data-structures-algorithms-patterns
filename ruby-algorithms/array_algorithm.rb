@@ -64,6 +64,30 @@ module ArrayAlgorithm
     JSON.generate(input)
   end
   ################################################################
+
+  def self.tictactoe_game_over?(arr)
+    # check rows
+    for r in 0..2
+      if(arr[r][0] == arr[r][1] && arr[r][1] == arr[r][2] && arr[r][0] == arr[r][2])
+        return true 
+      end  
+    end
+    #check columns
+    for c in 0..2
+      if(arr[0][c] == arr[1][c] && arr[1][c] == arr[2][c] && arr[0][c] == arr[2][c])
+        return true
+      end
+    end
+    #check left diagonal
+    if(arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2] && arr[0][0] == arr[2][2])
+      return true
+    end
+    #check right diagonal
+    if(arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0] && arr[0][2] == arr[2][0])
+      return true
+    end
+    return false
+  end
 end
 
 

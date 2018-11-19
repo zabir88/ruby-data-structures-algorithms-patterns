@@ -38,7 +38,7 @@ module LinkedListAlgorithm
   def self.remove_duplicates_in_linked_list(list)
     current = list.head
     count_dups = Hash.new(0)
-    while(current.value != nil)
+    while(current.next != nil)
       count_dzups[current.value] += 1  
       current = current.next
     end
@@ -47,23 +47,68 @@ module LinkedListAlgorithm
   ################################################################
 
   def self.delete_middle_node(list, element)
+    # Assuming singly linked list
     current_node = list.head
-    while(current_node.value != element)
-      prev_node = current_node 
-      current_node = current_node.next
+    last_node = list.tail
+    if(current_node.value == element)
+      current_node.next = current_node
+    elsif(last_node.value == element)
+      while(current_node.next != nil)
+        prev_node = current_node
+        current_node = current_node.next
+      end
+      prev_node.next = nil
+      last_node = prev_node
+    else 
+      while(current_node.next != nil)
+        prev_node = current_node 
+        current_node = current_node.next
+      end
+      prev_node.next = current_node.next
     end
-    prev_node.next = current_node.next
-
   end
   ################################################################
 
   def self.palindrome(list)
-
+    current_list_node = list.head
+    # reverse_list_node = list.reverse
+    p current_list_node
+    p list.reverse
+    upto = list.length/2
+    i = 0
+    while(i <= upto) 
+      # p i
+      # p current_list_node
+      # p reverse_list_node
+      if(current_list_node.value != reverse_list_node.value)
+        return false
+      end
+      current_list_node = current_list_node.next
+      reverse_list_node = reverse_list_node.next
+      i += 1
+    end
+    return true
   end
   ################################################################
 
   def self.loop_detection()
 
+  end
+
+  def self.remove_nth_from_end(list, n)
+    # Data Structure: Singly Linked List
+    # Time complexity: O(n)
+    # Space complexity: O(1)
+    list.reverse # O(n)
+    current_node = list.head
+    i = 1
+    while(i != n)
+      prev_node = current_node
+      current_node = current_node.next
+      i += 1
+    end
+    prev_node.next = current_node.next
+    list.reverse # O(n)
   end
   ################################################################
 end
@@ -73,7 +118,8 @@ single_list.append(1)
 single_list.append(2)
 single_list.append(3)
 single_list.append(4)
-p single_list.head
-LinkedListAlgorithm.delete_middle_node(single_list, 3)
-p single_list.head
+single_list.append(5)
+
+p LinkedListAlgorithm.remove_nth_from_end(single_list, 2)
+
 
