@@ -3,14 +3,31 @@ class StackWithDoublyLinkedList
   attr_reader :head, :tail, :length
   
   def initialize
-    @node = {value: nil, prev: nil, next: nil}
     @head, @tail, @length = nil, nil, 0
   end
 
-  def append()
+  def append(el)  
+    node = {value: nil, prev: nil, next: nil}
+    if(@length == 0)
+      @head = node
+      @tail = @head
+    else
+      node.prev = @tail
+      @tail.next = node
+      @tail = node
+    end
+    @length += 1
   end
 
   def pop
+    if(@length == 0)
+      @head = nil
+      @tail = @head
+    else
+      @tail = @tail.prev
+      @tail.next = nil
+    end
+    @length -= 1
   end
 end
 

@@ -39,7 +39,7 @@ module LinkedListAlgorithm
     current = list.head
     count_dups = Hash.new(0)
     while(current.next != nil)
-      count_dzups[current.value] += 1  
+      count_dups[current.value] += 1  
       current = current.next
     end
     count_dups.keys
@@ -91,10 +91,6 @@ module LinkedListAlgorithm
   end
   ################################################################
 
-  def self.loop_detection()
-
-  end
-
   def self.remove_nth_from_end(list, n)
     # Data Structure: Singly Linked List
     # Time complexity: O(n)
@@ -109,6 +105,10 @@ module LinkedListAlgorithm
     end
     prev_node.next = current_node.next
     list.reverse # O(n)
+  end
+  ################################################################
+  def self.loop_detection()
+
   end
   ################################################################
 end

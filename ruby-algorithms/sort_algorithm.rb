@@ -14,7 +14,7 @@ module SortAlgorithm
     # Data Structure: Arrays
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    ind_small, ind_big, result = 0, 0, []
+    ind_small, ind_big = 0, 0
     arr_big = arr1.length > arr2.length ? arr1 : arr2 
     arr_small = arr1.length > arr2.length ? arr2 : arr1 
     
@@ -35,6 +35,11 @@ module SortAlgorithm
   ################################################################
 
   def self.group_anagrams(arr)
+    # Optimized Solution
+    # Data Structure: Hash Table
+    # Time Complexity: O(nlogn)
+    # Space Complexity: O(n)
+    # Note: Anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
     result = Hash.new {|h,k| h[k]=[]}
     for i in 0..arr.length-1
       key = arr[i].split(//).sort.join # O(nlogn)
@@ -44,8 +49,8 @@ module SortAlgorithm
   end
   ################################################################
 
-  def self.sum_two_elements(arr, target)
-    # Time Complexity: O(n logn)
+  def self.sum_two_elements_equal_to_target(arr, target)
+    # Time Complexity: O(nlogn)
     # Data Structure: Array
     arr = arr.sort
     low = 0
@@ -68,7 +73,7 @@ module SortAlgorithm
   ################################################################
 
 
-  def self.sum_three_elements(arr, target)
+  def self.sum_three_elements_equal_to_target(arr, target)
     # Time Complexity: O(n^2)
     # Data Structure: Array
     arr = arr.sort 

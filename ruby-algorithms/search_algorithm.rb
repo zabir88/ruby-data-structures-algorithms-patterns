@@ -3,9 +3,9 @@ require 'byebug'
 module SearchAlgorithm
   
   def self.binary_search(arr, el)
-    #Data Structure: Array
-    #Time Complexity: O(logn)
-    #Space Complexity: O(1)
+    # Data Structure: Array
+    # Time Complexity: O(logn)
+    # Space Complexity: O(1)
     first = 0
     last = arr.length - 1
     while(first <= last)
@@ -26,7 +26,7 @@ module SearchAlgorithm
 
   def self.sparse_search(arr, el)
     first = 0
-    last = arr.length-1
+    last = arr.length - 1
     while (first <= last)
       mid = (first + last)/2
       if(arr[mid] == '')

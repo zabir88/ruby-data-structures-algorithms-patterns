@@ -1,55 +1,58 @@
 require 'byebug'
 
-module ArrayAlgorithm
-  
-  def self.sum_array_elements(arr)
-    # Time Complexity: O(n)
-    # Space Complexity: O(1)
-    # Data Structure: Array 
-    arr.inject{|sum, i| sum+=i}
-  end
-  ################################################################
-  
+module ArrayAlgorithm  
   def self.join_corresponding_string_elements(str1, str2)
+    # Brute force solution: Iterate through both arrays at the same time and end iteration for the bigger string and keep pushing the elements from both arrays in a new array making the new array 2D. Then join all the inner arrays.
     # Time Complexity: O(n)
     # Space Complexity: O(n)
     # Data Structure: Array 
-    arr1 =str1.split(//)
-    arr2 =str2.split(//)
-    arr = []
-    arr = arr1.length > arr2.length ? arr1 : arr2
     result = []
-    for i in 0..arr.length-1
-      result << [arr1[i], arr2[i]]
-    end    
+    if(str1.length > str2.length)
+      for i in 0..str1.length-1
+        result << [str1[i], str2[i]]
+      end
+    else
+      for i in 0..str2.length-1
+        result << [str1[i], str2[i]]
+      end 
+    end   
     result.join
   end
   ################################################################
 
-  def self.palindrome(sample)
+  def self.palindrome(str)
     # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    # Data Structure: Array
-    arr = sample.downcase.gsub(' ', '').split(//)
-    arr.each_index do |index|
-      if arr[index] != arr[-index-1]
-        return "#{sample} is not a palindrome"
+    # Space Complexity: O(1)
+    # Data Structure: String
+    for index in 0..str.length-1
+      if str[index] != str[-index-1]
+        return "#{str} is not a palindrome"
       end
     end
-    "#{sample} is a palindrome"
+    "#{str} is a palindrome"
   end
   ################################################################
 
   def self.reverse_sentence(sentence)
+    # Brute force solution: Iterate through the array and push arr[-i-1] to a new array called result.
     # Data Structure: Array
     # Time Coplexity: O(n)
     # Space Coplexity: O(n)
-    result = []
-    input = sentence.split
-    for i in 1..input.length
-      result << input[-i]
+    
+    # Optmized Solution
+    # Data Structure: Array
+    # Time Coplexity: O(n)
+    # Space Coplexity: O(n)
+    arr = sentence.split
+    front, back = 0, arr.length-1
+    while(front < back)
+      temp = arr[front]
+      arr[front] = arr[back]
+      arr[back] = temp
+      front += 1
+      back -= 1
     end
-    result.join(' ')
+    arr
   end
   ################################################################
 
@@ -66,6 +69,11 @@ module ArrayAlgorithm
   ################################################################
 
   def self.tictactoe_game_over?(arr)
+    # Optimized Solution
+    # Data Structure: 2D Array
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+
     # check rows
     for r in 0..2
       if(arr[r][0] == arr[r][1] && arr[r][1] == arr[r][2] && arr[r][0] == arr[r][2])
@@ -88,6 +96,52 @@ module ArrayAlgorithm
     end
     return false
   end
+  ################################################################
+  
+  def self.cycle_in_array?(arr)
+    # Optimized Solution
+    # Data Structure: Array
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    
+    # Assumption no elements is greater than arr.length - 1
+    i, j = 0, 0 
+    while(true)
+      if(i < 0 || j < 0 || i >= arr.length || j>=arr.length )
+        return false
+      end
+      i = arr[i]
+      if(i == j)
+        return true
+      end
+      if(i < 0 || i >= arr.length)
+        return false
+      end
+      i = arr[i]
+      if(i == j)
+        return true
+      end
+      j = arr[j]
+      if(j == i)
+        return true
+      end
+    end
+  end
+  ################################################################
+  
+  def self.find_intersection_between_arrays()
+    # Brute force solution: Loop through 3 arrays and save the result in a new array
+    # Time Complexity: O(n^3)
+    # Space Complexity: O(n)
+    
+    #Optimized Solution
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    
+  end
+  ################################################################
+
 end
 
+p ArrayAlgorithm.palindrome('racecar')
 

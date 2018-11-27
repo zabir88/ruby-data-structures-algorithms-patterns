@@ -17,6 +17,7 @@ module MiscAlgorithm
     # Data structure: String
     # Time complexity: O(n^3)
     # Space complexity: O(1)
+    # Brute Force Solution
     if(str.length > 0)
       largest_palindrome = ''
       i = 0

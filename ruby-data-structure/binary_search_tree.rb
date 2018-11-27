@@ -1,4 +1,4 @@
-class Tree
+class BinarySearhTree
   attr_accessor :value, :right, :left, :count
   
   def initialize(val)

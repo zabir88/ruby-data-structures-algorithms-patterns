@@ -33,10 +33,9 @@ module HashAlgorithm
   end
   ################################################################
 
-  def self.longest_common_sequence(str_1, str_2)
+  def self.longest_common_subsequence(str_1, str_2)
     #Data structure: HashMap
-    #Complexity: O(n)
-    str_1, str_2 = str_1.split(//), str_2.split(//)
+    #Complexity: O(nlogn)
     result_1, result_2 = Hash.new(0), Hash.new(0)
     #Removing duplicates from both strings
     str_1.each {|i| result_1[i] += 1 }
@@ -90,10 +89,11 @@ module HashAlgorithm
   ################################################################
 
   def self.longest_substring(s)
+    # Optimized Solution
     # Data Structure: Hash Table
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    store = Hash.new
+    store = {}
     i, j = 0, 0
     longest_substring = ''
     while(i < s.length && j < s.length)
@@ -109,12 +109,6 @@ module HashAlgorithm
     longest_substring
   end
   ################################################################
-
-  
-  
-
-  ################################################################
-
 end
 
 p HashAlgorithm.longest_substring("abcab")

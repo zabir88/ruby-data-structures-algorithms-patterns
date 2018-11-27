@@ -1,52 +1,38 @@
 require 'byebug'
 
 module RecursionAlgorithm
-  
-  def self.palindrome_recursive(sample)
-    # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    # Data Structure: Array
-    arr = sample.downcase.gsub(' ', '').split(//)
-    if(arr.length == 1)
-      return true
-    else
-      return false if arr.shift != arr.pop
-      arr = arr.join
-      palindrome_recursive(arr)
-    end
-  end
-  ################################################################
-
   def self.fibonacci_recursive(n)
-    puts "#{n}"
     if(n == 0)
       return 0
     elsif(n == 1)
       return 1
     else
-      puts "stack 1 var: #{n}"
-      a = fib(n-1)
-      puts "stack 1 f: #{a}"
-
-      puts "stack 2 var: #{n}"
-      b =  fib(n-2)
-      puts "stack 2 f: #{b}"
-      a + b
+      fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
     end
   end
   ################################################################
 
-  def self.fibonacci_memoization(n)
-    fibarr = [0,1,1];
-    if (fibarr[n] == nil)
-      n1, n2 = n-2, n-1
-      a, b = fib(n1), fib(n2)
-      fibarr[n] = a + b;
+  def self.factorial_recursive(n)
+    if(n <= 1)
+      return n
     end
-    fibarr[n]
+    n * factorial_recursive(n - 1)
   end
   ################################################################
 
+  def self.palindrome_recursive(str)
+    # Time Complexity: O(n)
+    # Space Complexity: O(1)
+    # Data Structure: String
+    if(str.length == 1)
+      return true
+    else
+      return false if str.slice!(0, 1) != str.slice!(-1, 1)
+      palindrome_recursive(arr)
+    end
+  end
+  ################################################################
+  
   def self.number_triangle_recursive(n)
     # Complexity: O(n)
     # Data Structure: String
@@ -60,76 +46,57 @@ module RecursionAlgorithm
     end
   end
   ################################################################
-end
-=begin
-
-#1. Finding haviest rock/ max number using recursion
-def rock_judger(rock)
-  if rock.length <= 2
-    a,b = rock[0], rock[-1] 
-    return a>b ? a : b
-  else
-    a= rock_judger(rock.slice!(0, rock.length/2))
-    b= rock_judger(rock)
-  end
-end
-rocks = 5.times.map{rand(20)+1}
-p rocks
-p rock_judger(rocks)
-##################################
-#2. Adding elements upto the input number at the beginning of an array using recursion 
-def append(arr=[], n)
-  arr<<n
-  return arr if n==0
-  append(arr, n-1)
-end
-p append(2)
-
-###################################
-#4. Finding factorial of a number using recursion 
-def fact(n)
-  return 1 if n==1 || n==0
-  n*fact(n-1)
-end
-p fact(3)
-#################################
-
-#6. Print "n-1 bottles of water on the wall" using recursion
-def waterbottles(n)
-  if n==0
-    return "no more waterbottles on the wall"
-  else
-    puts "#{n} waterbottles on the wall"  
-    return waterbottles(n-1)
-  end
-end
-p waterbottles(3)       
-###################################
-#7. Flattening array using recursion 
-def flatten(array, result = [])
-  array.each do |element|
-    if element.is_a?(Array)
-      flatten(element, result)
-    else
-      result << element
-    end
-  end 
-  result
-end
-p flatten([[1,2], [3,4]])
-######################################
-#8. Number shuffle problem using recursion
-def shuffle(num, result)
   
-  if (result.uniq.length==6)
-    return result.uniq.sort
-  else
-    arr_num = num.to_s.split(//)
-    result << arr_num.shuffle.join.to_i 
-    shuffle(num,result)
+  def self.rock_judger(rock)
+    if rock.length <= 2
+      a,b = rock[0], rock[-1] 
+      return a>b ? a : b
+    else
+      a= rock_judger(rock.slice!(0, rock.length/2))
+      b= rock_judger(rock)
+    end
   end
+  ################################################################
+
+  def self.init_array_upto_n(arr=[], n)
+    arr<<n
+    return arr if n==0
+    init_array_upto_n(arr, n-1)
+  end
+  
+  ################################################################
+
+  def self.flatten(array, result = [])
+    array.each do |element|
+      if element.is_a?(Array)
+        flatten(element, result)
+      else
+        result << element
+      end
+    end 
+    result
+  end
+  ################################################################
+
+  def shuffle(num, result = [])
+    if (result.uniq.length == 6)
+      return result.uniq.sort
+    else
+      arr_num = num.to_s.split(//)
+      result << arr_num.shuffle.join.to_i 
+      shuffle(num,result)
+    end
+  end
+
 end
-p shuffle(123, [])
+
+p RecursionAlgorithm.fibonacci_recursive(4)
+
+
+
+
+    
+=begin
 ######################################
 #9. Double integers using recursion 
 def doubler (n)
