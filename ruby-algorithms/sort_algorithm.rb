@@ -13,10 +13,15 @@ module SortAlgorithm
   def self.merge_two_sorted_arrays(arr1, arr2)
     # Data Structure: Arrays
     # Time Complexity: O(n)
-    # Space Complexity: O(n)
+    # Space Complexity: O(1)
     ind_small, ind_big = 0, 0
-    arr_big = arr1.length > arr2.length ? arr1 : arr2 
-    arr_small = arr1.length > arr2.length ? arr2 : arr1 
+    if(arr1.length == arr2.length)
+      arr_big = arr1
+      arr_small = arr2
+    else
+      arr_big = arr1.length > arr2.length ? arr1 : arr2 
+      arr_small = arr1.length > arr2.length ? arr2 : arr1 
+    end
     
     while (ind_big < arr_big.length && ind_small < arr_small.length)
       if(arr_small[ind_small] < arr_big[ind_big])
@@ -25,22 +30,18 @@ module SortAlgorithm
       end
       ind_big += 1
     end
-
-    while(ind_small < arr_small.length)
-      arr_big << arr_small[ind_small]
-      ind_small += 1
-    end
     arr_big
   end
   ################################################################
 
   def self.group_anagrams(arr)
+    # Note: Anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
+
     # Optimized Solution
     # Data Structure: Hash Table
     # Time Complexity: O(nlogn)
     # Space Complexity: O(n)
-    # Note: Anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
-    result = Hash.new {|h,k| h[k]=[]}
+    result = Hash.new {|h,k| h[k] = []}
     for i in 0..arr.length-1
       key = arr[i].split(//).sort.join # O(nlogn)
       result[key] << arr[i]  # O(n)
@@ -51,6 +52,7 @@ module SortAlgorithm
 
   def self.sum_two_elements_equal_to_target(arr, target)
     # Time Complexity: O(nlogn)
+    # Space Complexity: O(1)
     # Data Structure: Array
     arr = arr.sort
     low = 0
@@ -96,5 +98,5 @@ module SortAlgorithm
   end
 end
 
-p SortAlgorithm.sum_three_elements([1,4,5,6,10,11], 26)
+p SortAlgorithm.sum_two_elements_equal_to_target([1,2,3], 4)
 

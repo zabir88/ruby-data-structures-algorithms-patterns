@@ -14,8 +14,8 @@
 # pop: O(n) 
 # shift: O(1)
 # access element: O(n)
-# insert element: O(1)
-# delete element: O(1)
+# insert element: O(n)
+# delete element: O(n)
 # search : O(n)
 
 require 'byebug'
@@ -193,10 +193,6 @@ class SinglyLinkedList
     @length <= 0 ? true : false
   end
 end
-
-
-
-
 
 
 

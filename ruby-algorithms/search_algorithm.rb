@@ -20,7 +20,6 @@ module SearchAlgorithm
         return "#{el} not found in this array"
       end
     end
-    return -1
   end 
   ################################################################ 
 

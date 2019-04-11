@@ -34,6 +34,7 @@ module HashAlgorithm
   ################################################################
 
   def self.longest_common_subsequence(str_1, str_2)
+    # A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
     #Data structure: HashMap
     #Complexity: O(nlogn)
     result_1, result_2 = Hash.new(0), Hash.new(0)
@@ -48,6 +49,47 @@ module HashAlgorithm
     new_result = new_result.select{|key| new_result[key] > 1}.keys.sort.join
     "#{new_result}: #{new_result.length}"
   end
+  ################################################################
+
+  def self.longest_substring(s)
+    # Length of longest substring without repitition
+    # Optimized Solution
+    # Data Structure: Hash Table
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    store = {}
+    i, j = 0, 0
+    longest_substring = ''
+    while(i < s.length && j < s.length)
+      if(store.has_key?(s[j]) == false)
+        store[s[j]] = j
+        j += 1
+        longest_substring = s[i..j]
+      else
+        store.delete(s[i])
+        i += 1
+      end
+    end
+    longest_substring
+  end
+  ################################################################
+  def self.pair_with_a_given_sum(arr, target)
+    # Optimized Solution
+    # Time Coplexity: O(n)
+    # Space Coplexity: O(n)
+    store = {}
+    for i in 0..arr.length-1
+      temp = target - arr[i]
+      if(store.has_key?(temp))
+        return "#{temp} & #{arr[i]}"
+      else
+        store[arr[i]] = i
+      end
+    end
+    "not found"
+  end
+  ################################################################
+  
   ################################################################
 
   def self.giving_away_candies(t)
@@ -87,28 +129,6 @@ module HashAlgorithm
     candies.select{|key, value| candies[key] > 0}.keys
   end
   ################################################################
-
-  def self.longest_substring(s)
-    # Optimized Solution
-    # Data Structure: Hash Table
-    # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    store = {}
-    i, j = 0, 0
-    longest_substring = ''
-    while(i < s.length && j < s.length)
-      if(store.has_key?(s[j]) != true)
-        store[s[j]] = j
-        j += 1
-        longest_substring = s[i..j]
-      else
-        store.delete(s[i])
-        i += 1
-      end
-    end
-    longest_substring
-  end
-  ################################################################
 end
 
-p HashAlgorithm.longest_substring("abcab")
+p HashAlgorithm.pair_with_a_given_sum([1, 4, 45, 6, 10, -8], 16)

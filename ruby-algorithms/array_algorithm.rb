@@ -3,20 +3,24 @@ require 'byebug'
 module ArrayAlgorithm  
   def self.join_corresponding_string_elements(str1, str2)
     # Brute force solution: Iterate through both arrays at the same time and end iteration for the bigger string and keep pushing the elements from both arrays in a new array making the new array 2D. Then join all the inner arrays.
+    
     # Time Complexity: O(n)
-    # Space Complexity: O(n)
+    # Space Complexity: O(1)
     # Data Structure: Array 
-    result = []
-    if(str1.length > str2.length)
-      for i in 0..str1.length-1
-        result << [str1[i], str2[i]]
-      end
-    else
-      for i in 0..str2.length-1
-        result << [str1[i], str2[i]]
-      end 
-    end   
-    result.join
+    if(str1.length === str2.length)
+      small_str = str1
+      big_str = str2
+    end
+    small_str = str1.length < str2.length ? str1 : str2
+    big_str = str1.length > str2.length ? str1 : str2
+
+    big_indx, small_indx = 0, 0 
+    while(big_indx < big_str.length && small_indx < small_str.length)
+      big_str.insert(big_indx, small_str[small_indx])
+      big_indx += 2
+      small_indx += 1
+    end
+    big_str
   end
   ################################################################
 
@@ -42,7 +46,7 @@ module ArrayAlgorithm
     # Optmized Solution
     # Data Structure: Array
     # Time Coplexity: O(n)
-    # Space Coplexity: O(n)
+    # Space Coplexity: O(1)
     arr = sentence.split
     front, back = 0, arr.length-1
     while(front < back)
@@ -110,6 +114,7 @@ module ArrayAlgorithm
       if(i < 0 || j < 0 || i >= arr.length || j>=arr.length )
         return false
       end
+      # First increment of fast pointer
       i = arr[i]
       if(i == j)
         return true
@@ -117,31 +122,45 @@ module ArrayAlgorithm
       if(i < 0 || i >= arr.length)
         return false
       end
+      # Second increment of fast pointer
       i = arr[i]
       if(i == j)
         return true
       end
+      if(i < 0 || i >= arr.length)
+        return false
+      end
+
+      # Increment of slow pointer
       j = arr[j]
       if(j == i)
         return true
+      end
+      if(j < 0 || j >= arr.length)
+        return false
       end
     end
   end
   ################################################################
   
-  def self.find_intersection_between_arrays()
+  def self.find_intersection_between_arrays(arr1, arr2)
     # Brute force solution: Loop through 3 arrays and save the result in a new array
     # Time Complexity: O(n^3)
     # Space Complexity: O(n)
     
-    #Optimized Solution
+    # Optimized Solution
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    
+    arr1 = arr1.uniq
+    arr2 = arr2.uniq
+    output = Hash.new(0)
+    arr1.each {|i| output[i] += 1}
+    arr2.each {|i| output[i] += 1}
+    output.select{|k| output[k] > 1}.keys
   end
   ################################################################
 
 end
 
-p ArrayAlgorithm.palindrome('racecar')
+p ArrayAlgorithm.find_intersection_between_arrays([1,2,2,1], [2,2])
 

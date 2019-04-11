@@ -28,7 +28,7 @@ module LinkedListAlgorithm
       else
         carry = 0
       end
-      result_list.unshift(sum)
+      result_list.append(sum)
       length -= 1    
     end
     result_list.head
@@ -113,13 +113,13 @@ module LinkedListAlgorithm
   ################################################################
 end
 
-single_list = SinglyLinkedList.new
-single_list.append(1)
-single_list.append(2)
-single_list.append(3)
-single_list.append(4)
-single_list.append(5)
+# single_list = SinglyLinkedList.new
+# single_list.append(1)
+# single_list.append(2)
+# single_list.append(3)
+# single_list.append(4)
+# single_list.append(5)
 
-p LinkedListAlgorithm.remove_nth_from_end(single_list, 2)
+p LinkedListAlgorithm.add_two_numbers_as_linked_list
 
 

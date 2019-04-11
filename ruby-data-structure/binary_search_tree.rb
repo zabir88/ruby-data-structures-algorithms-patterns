@@ -1,67 +1,84 @@
-class BinarySearhTree
-  attr_accessor :value, :right, :left, :count
-  
+# Binary Search Tree Insert and Depth First Traversal
+
+class Node
+  attr_accessor :value, :left_node, :right_node
   def initialize(val)
     @value = val
-    @left, @right = nil, nil
+    @left_node = nil
+    @right_node = nil
+  end
+end
+
+
+class BinarySearhTree
+  attr_accessor :root
+  
+  def initialize(val = nil)
+    @root = Node.new(val)
   end
 
-  def insert(val)
-    if(val > @value)
-      if(@right == nil)
-        @right = Tree.new(val) 
+  def insert(node = @root, val)
+    if(val > node.value)
+      if(node.right_node == nil)
+        node.right_node = Node.new(val) 
       else
-        @right.insert(val)
+        insert(node.right_node, val)
       end
     else
-      if(@left == nil)
-        @left = Tree.new(val)
+      if(node.left_node == nil)
+        node.left_node = Node.new(val)
       else
-       @left.insert(val)
+        insert(node.left_node, val)
       end
     end 
   end
 
-  def contains?(val)
-    if(@value == val)
+  def contains?(node = @root, val)
+    if(node.value == val)
       return true 
-    elsif(val < @value)
-      if(@left != nil && @left.value == val)
+    elsif(val < node.value)
+      if(node.left_node != nil && node.left_node.value == val)
         return true
-      elsif(@left == nil)
+      elsif(node.left_node == nil)
         return false
       else
-        @left.contains?(val)
+        contains?(node.left_node, val)
       end
-    elsif(val > @value)
-      if(@left != nil && @right.value == val)
+    else
+      if(node.right_node != nil && node.right_node.value == val)
+        puts node.value
         return true
-      elsif(@right == nil)
+      elsif(node.right_node == nil)
         return false
       else
-        @right.contains?(val)
+        contains?(node.right_node, val)
       end
     end
-    return false 
+    return "doesnot exist" 
   end
 
   def check_depth
   end
 
-  def pre_order_traverse
+  def pre_order_traversal
   end
 
-  def in_order_traverse
+  def in_order_traversal
   end
 
-  def post_order_traverse
+  def post_order_traversal
   end
   
 end
 
-first = Tree.new(5)
+first = BinarySearhTree.new(5)
 first.insert(2)
 first.insert(7)
 first.insert(4)
 first.insert(8)
-p first.contains?(1)
+first.insert(1)
+first.insert(6)
+first.insert(3)
+p first.contains?(4)
+
+

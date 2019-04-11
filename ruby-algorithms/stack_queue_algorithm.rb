@@ -91,9 +91,9 @@ module StackQueueAlgorithm
   ################################################################
 
   def self.queue_with_two_stacks(s1)
-    s2 = []
-    # Enqueue will be the same as push method in stack
+    # Enqueue will be the same as push method in stack    
     # For Dequeue the stack has to be reversed and then perform pop on reversed stack
+    s2 = []
     while(s1.length > 0)
       last = s1.pop
       s2.push(last)

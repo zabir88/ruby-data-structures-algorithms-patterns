@@ -1,6 +1,7 @@
 require 'byebug'
 
 module DpAlgorithm
+  
   def self.longest_palindromic_substring(str)
     # Brute force solution: Iterate through every possible substring and check whether it is a palindrome or not.
     # Data structure: Array
@@ -183,13 +184,16 @@ module DpAlgorithm
           j += 1 
         end
       end
+      
       if(current_sum == target)
         return "index between #{j} and #{i-1}"
       end 
+      
       if(i < arr.length)
         current_sum += arr[i]     
       end
     end
+    
     return "not found"
   end
   ################################################################

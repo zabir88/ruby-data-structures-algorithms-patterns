@@ -15,8 +15,8 @@
 # pop: O(1) 
 # shift: O(1)
 # access element: O(n)
-# insert element: O(1)
-# delete element: O(1)
+# insert element: O(n)
+# delete element: O(n)
 # search: O(n)
 ###### Doubly Linked List ######
 
