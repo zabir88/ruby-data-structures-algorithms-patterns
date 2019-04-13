@@ -30,49 +30,51 @@ module HashAlgorithm
     words = Hash.new(0)
     list.each{|i| words[i] += 1}
     words  
+  end  
+  ################################################################
+  
+  def self.arr_subset?(arr1, arr2)
+    hash = Hash.new(0)
+    big_arr = arr1.length > arr2.length ? arr1 : arr2
+    small_arr = arr1.length < arr2.length ? arr1 : arr2
+    big_arr.each{|i| hash[i] += 1}
+    for i in 0..small_arr.length-1
+      if(hash.has_key?(small_arr[i]) == false)
+        return false
+      end
+    end
+    true
   end
   ################################################################
-
-  def self.longest_common_subsequence(str_1, str_2)
-    # A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
-    #Data structure: HashMap
-    #Complexity: O(nlogn)
-    result_1, result_2 = Hash.new(0), Hash.new(0)
-    #Removing duplicates from both strings
-    str_1.each {|i| result_1[i] += 1 }
-    str_2.each {|i| result_2[i] += 1 }
-    result_1_keys, result_2_keys = result_1.keys, result_2.keys
-    #Finding the elements present in both strings
-    new_result = Hash.new(0)
-    result_1_keys.each{|i| new_result[i] += 1}
-    result_2_keys.each{|i| new_result[i] += 1}
-    new_result = new_result.select{|key| new_result[key] > 1}.keys.sort.join
-    "#{new_result}: #{new_result.length}"
-  end
-  ################################################################
-
-  def self.longest_substring(s)
+  
+  def self.longest_substring(str)
     # Length of longest substring without repitition
     # Optimized Solution
     # Data Structure: Hash Table
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    store = {}
-    i, j = 0, 0
-    longest_substring = ''
-    while(i < s.length && j < s.length)
-      if(store.has_key?(s[j]) == false)
-        store[s[j]] = j
+    store = Hash.new
+    output = ''
+    i, j = 0, 0, 0
+    while( j < str.length)
+      if(store.has_key?(str[j]) == false)
+        store[str[j]] = j
         j += 1
-        longest_substring = s[i..j]
       else
-        store.delete(s[i])
+        if str[i..j-1].length > output.length
+          output = str[i..j-1]
+        end
+        store.delete(str[i])
         i += 1
       end
     end
-    longest_substring
+    if str[i..j].length > output.length
+      output = str[i..j]
+    end
+    output.length
   end
   ################################################################
+  
   def self.pair_with_a_given_sum(arr, target)
     # Optimized Solution
     # Time Coplexity: O(n)
@@ -82,14 +84,46 @@ module HashAlgorithm
       temp = target - arr[i]
       if(store.has_key?(temp))
         return "#{temp} & #{arr[i]}"
-      else
-        store[arr[i]] = i
+      end
+      store[arr[i]] = i
+    end
+    "not found"
+  end
+  ################################################################
+  
+  def self.triplet_with_a_given_sum(arr, target)
+    # Optimized Solution
+    # Time Coplexity: O(n^2)
+    # Space Coplexity: O(n)
+    for i in 0..arr.length-2
+      store = {}
+      current_sum = target - arr[i]
+      for j in i+1..arr.length-1
+        if store.has_key?(current_sum - arr[j]) 
+          return "#{current_sum - arr[j]}, #{arr[i]}, #{arr[j]}"
+        end
+        store[arr[j]] = j
       end
     end
     "not found"
   end
   ################################################################
   
+  def self.subarray_with_a_given_sum(arr, target)
+    store = {}
+    current_sum = 0
+    for i in 0..arr.length-1
+      current_sum = current_sum + arr[i]
+      if(current_sum == target)
+        return arr[0..i]
+      end
+      if (store.has_key?(current_sum-target) )
+        return arr[store[current_sum - target] + 1..i]
+      end
+      store[current_sum] = i
+    end
+    
+  end
   ################################################################
 
   def self.giving_away_candies(t)
@@ -131,4 +165,4 @@ module HashAlgorithm
   ################################################################
 end
 
-p HashAlgorithm.pair_with_a_given_sum([1, 4, 45, 6, 10, -8], 16)
+p HashAlgorithm.subarray_with_a_given_sum([5,4,1,2,6,7], 7)
