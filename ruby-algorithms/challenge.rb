@@ -1,29 +1,12 @@
-require 'net/http'
-require 'json'
-def getMovieTitles(substr) 
-    ## first call
-    uri = URI("https://jsonmock.hackerrank.com/api/movies/search/?Title=$spiderman&page=1")
-    response = Net::HTTP.get_response(uri)
-    response = JSON.parse(response.body)
-    titles = []
-    ## getting all titles and pushing them in titles array for the first call
-    # for i in response['data']
-    #     titles << i['Title']
-    # end
-    ## if multiple pages then additional api calls to get more titles
-    # if(response['total_pages'] > 1)
-    #     i = 2
-    #     while(i <= response['total_pages']) 
-    #         uri = URI("https://jsonmock.hackerrank.com/api/movies/search/?Title=${substr}&page=${i}")
-    #         response = Net::HTTP.get_response(uri)
-    #         response = JSON.parse(response.body) 
-    #         for i in response['data']
-    #             titles << i['Title']
-    #         end
-    #     end
-    #     i += 1
-    # end
-    response
-end
+data = {
+  1: {tracking_id: 1, name:'sd', id: 1}, 
+  2: {tracking_id: 1, name: 'sdfa', id: 2}
+  3: {tracking_id: 3, name: 'sdasdsd', id: 3}
+  4: {tracking_id: 3, name: 's', id: 4}
+}
 
-p getMovieTitles('spiderman')
+def find_children(data)
+  for i in 0..data.length-1
+    
+  end
+end
