@@ -53,7 +53,7 @@ class SinglyLinkedList
     # single element in list
     if(current_node.next == nil)
       @head = nil
-      @tail = nil
+      @tail = @head
       return current_node
     end
     while(current_node.next != nil)
@@ -69,41 +69,24 @@ class SinglyLinkedList
   def prepend(val)
     node = Node.new(val)
     if @head == nil
-      @head = Node.new(val)
+      @head = node
       @tail = @head
     else
       prev_head = @head
       @head = node
-      @head.next = prev_head
+      node.next = prev_head
     end
   end
 
   def shift
-    if @head == nil
-      @tail = nil
-      return nil
-    end
+    return nil if @head == nil
+    prev_head = @head
     @head = @head.next
-    if @head == nil
-      @tail = nil
-    end
+    prev_head
   end
 
-  # def get(ind)
-  #   if(ind >= 0 && ind < @length)
-  #     current_node = @head
-  #     i = 0
-  #     while(i != ind)
-  #       current_node = current_node.next
-  #       i += 1
-  #     end
-  #     current_node.value
-  #   else
-  #    return  nil
-  #   end
-  # end
-
   def insert(val, index)
+    node = Node.new(val)
     current_node = @head
     ind = 0
     while(ind != index)
@@ -111,42 +94,48 @@ class SinglyLinkedList
       current_node = current_node.next
       ind += 1
     end
-    node = Node.new(val)
     previous_node.next = node
     node.next = current_node
   end
 
   def delete(val)
-    return nil if @head == nil
     current_node = @head
+    # if list is empty
+    return nil if current_node == nil
     # if value is the first element
-    if(@head.value == val)
-      @head = @head.next
+    if(current_node.value == val)
+      self.shift
       return current_node
     end
-    while(current_node.value != val)
+    while(current_node.next != nil)
+      if(current_node.value == val) 
+        break
+      end
       previous_node = current_node
       current_node = current_node.next
-      break if current_node == nil
     end
     # value not found
     return nil if current_node == nil
-    previous_node.next = current_node.next
-    # if value is the last element
+    # if value is the last element in the list
     if current_node.next == nil
-      @tail = previous_node
+      self.pop
+      return current_node
     end
+    # element found in between first and last element in the list
+    previous_node.next = current_node.next
     current_node
   end
 
   def find(val)
     return nil if @head == nil
     current_node = @head
-    while(current_node.value != val)
+    while(current_node.next != nil)
+      if (current_node.value == val)
+        return current_node
+      end
       current_node = current_node.next
-      break if current_node == nil
     end
-    current_node
+    nil
   end
 
   def reverse
@@ -173,6 +162,7 @@ class SinglyLinkedList
   end
 
   def length
+    return 0 if @head == nil
     count = 0
     current_node = @head
     while(current_node != nil)
@@ -186,7 +176,7 @@ first = SinglyLinkedList.new
 first.append(1)
 first.append(2)
 first.append(3)
-first.reverse
+first.shift
 p first
 
 
