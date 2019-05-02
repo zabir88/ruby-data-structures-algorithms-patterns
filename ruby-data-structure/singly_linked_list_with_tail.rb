@@ -72,9 +72,8 @@ class SinglyLinkedList
       @head = node
       @tail = @head
     else
-      prev_head = @head
+      node.next = @head
       @head = node
-      node.next = prev_head
     end
   end
 
@@ -141,20 +140,16 @@ class SinglyLinkedList
   def reverse
     prev_node = nil
     current_node = @head
-    next_node = nil
+    new_tail = @head
     while(current_node != nil)
       next_node = current_node.next
       current_node.next = prev_node
       prev_node = current_node
       current_node = next_node
     end
-    find_tail = @head
-    while(find_tail != nil)
-      second_last_node = find_tail 
-      find_tail = find_tail.next
-    end
-    @tail = second_last_node
-    current_node = prev_node
+    new_tail.next = nil
+    @head = prev_node
+    @tail = new_tail
   end
 
   def is_empty?
@@ -176,7 +171,5 @@ first = SinglyLinkedList.new
 first.append(1)
 first.append(2)
 first.append(3)
-first.shift
+first.reverse
 p first
-
-

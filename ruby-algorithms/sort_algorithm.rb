@@ -51,7 +51,7 @@ module SortAlgorithm
   ################################################################
 
   def self.sum_two_elements_equal_to_target(arr, target)
-    # Time Complexity: O(nlogn)
+    # Time Complexity: O(logn)
     # Space Complexity: O(1)
     # Data Structure: Array
     arr = arr.sort

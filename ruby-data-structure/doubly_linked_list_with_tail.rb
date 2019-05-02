@@ -143,6 +143,19 @@ class DoublyLinkedListWithTail
   end
 
   def reverse
+    current_node = @head
+    prev_node = nil
+    new_tail = @head
+    while current_node != nil
+      next_node = current_node.next
+      current_node.next = prev_node
+      prev_node = current_node
+      prev_node.prev = next_node
+      current_node = next_node
+    end
+    new_tail.next = nil
+    @head = prev_node
+    @tail = new_tail
   end
 
   def length
@@ -156,7 +169,7 @@ class DoublyLinkedListWithTail
     count
   end
 
-  def is_empty?
+  def empty?
     @head == nil ? true : false
   end
 end
@@ -164,7 +177,6 @@ end
 first = DoublyLinkedListWithTail.new
 first.append(1)
 first.append(2)
-first.prepend(0)
-p first.head
-first.delete(1)
-p first.head
+first.append(3)
+first.reverse
+p first.tail

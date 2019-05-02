@@ -1,5 +1,5 @@
 require 'byebug'
-require_relative '../ruby-data-structure/doubly_linked_list'
+require_relative '../ruby-data-structure/doubly_linked_list_with_tail'
 
 module StackQueueAlgorithm
   
@@ -7,61 +7,67 @@ module StackQueueAlgorithm
     # Data Structure: Stack with Doubly Linked List
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    stack = DoublyLinkedList.new
-
-    string = string.split(//) 
+    stack = DoublyLinkedListWithTail.new
     for i in 0..string.length-1
-      stack.append('(') if string[i] == '('
-      stack.append('{') if string[i] == '{'
-      stack.append('[') if string[i] == '['
-      if(string[i] == ')')
-        if(stack.tail.value == '(')
+      stack.append(string[i]) if string[i] == '('
+      stack.append(string[i]) if string[i] == '{'
+      stack.append(string[i]) if string[i] == '['
+      if string[i] == ')'
+        if stack.tail.value == '('
           stack.pop
         else
           stack.append(string[i])
         end
-      elsif(string[i] == '}')
-        if(stack.tail.value == '{')
+      elsif string[i] == '}'
+        if stack.tail.value == '{'
           stack.pop
         else
           stack.append(string[i])
         end
-      elsif(string[i] == ']')
-        if(stack.tail.value == '[')
-          stack.append
+      elsif string[i] == ']'
+        if stack.tail.value == '['
+          stack.pop
         else
           stack.append(string[i])
         end
       end
     end
-    return true if stack.length == 0
-    return false if stack.length != 0
+    stack.empty? ? true : false
   end
   ################################################################
 
-  def self.lru_cache_add(item)
+  def self.lru_cache_add(val)
+    # If capacity not reached keep prependinfg to the queue.
+    # Once capacity is reached pop the last one and prepend the new one.
     queue = DoublyLinkedList.new
     capacity = 3
-    for i in 0..item.length-1
-      if(queue.length < capacity)
-        queue.unshift(item[i])
-      else
-        queue.pop
-        queue.unshift(item[i])
-      end
+    if queue.length < capacity
+      queue.prepend(val)
+    else
+      queue.pop
+      queue.prepend(val)
     end
-    queue.head
+    queue
   end
   ################################################################
 
-  def self.lru_cache_get(cache, item)
-    queue = cache
-    while(queue.value != item  && queue.next != nil)
-      queue = queue.next
-    end    
-    queue.value
+  def self.lru_cache_get(queue, val)
     # delete the node from queue
-    # unshift node in queue
+    # prepend node in queue
+    
+    # current_node = queue.head
+    # while(current_node.value != val && current_node.next != nil)
+    #   current_node = current_node.next
+    # end    
+    # prev_node = current_node.prev
+    # next_node = current_node.next
+    # prev_node.next = next_node
+    # next_node.prev = prev_node
+    # queue.prepend(current_node.value)
+    
+    getEl = queue.delete(val)
+    queue.prepend(getEl.value)
+    queue.head
   end
   ################################################################
 
@@ -81,7 +87,7 @@ module StackQueueAlgorithm
     s2 = []
     while(s1.length != 0)
       tmp = s1.pop
-      while(s2.length != 0 && s2.last > tmp)
+      while(s2.empty? == false && s2.last > tmp)
         s1.push(s2.pop)
       end
       s2.push(tmp)
@@ -90,21 +96,30 @@ module StackQueueAlgorithm
   end
   ################################################################
 
-  def self.queue_with_two_stacks(s1)
+  def self.dequeue_with_two_stacks(s1)
     # Enqueue will be the same as push method in stack    
     # For Dequeue the stack has to be reversed and then perform pop on reversed stack
+    s1 = s1
     s2 = []
     while(s1.length > 0)
       last = s1.pop
       s2.push(last)
     end
     s2.pop
+    while(s2.length > 0)
+      s1.push(s2.pop)
+    end
+    s1
   end
   ################################################################
 end
 
-p StackQueueAlgorithm.queue_with_two_stacks([23,234,324,12,34,45345,456])
-
+queue = DoublyLinkedListWithTail.new
+queue.append(1)
+queue.append(2)
+queue.append(3)
+# p StackQueueAlgorithm.isBalanced?('{[()]}')
+p StackQueueAlgorithm.dequeue_with_two_stacks([1,2,3])
 
 
 

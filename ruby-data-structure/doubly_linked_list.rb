@@ -140,6 +140,16 @@ class DoublyLinkedList
   end
 
   def reverse
+    current_node = @head
+    prev_node = nil
+    while current_node != nil
+      next_node = current_node.next
+      current_node.next = prev_node
+      prev_node = current_node
+      prev_node.prev = next_node
+      current_node = next_node
+    end
+    @head = prev_node
   end
 
   def is_empty?
@@ -161,10 +171,9 @@ end
 first = DoublyLinkedList.new
 first.append(1)
 first.append(2)
-first.insert(4,1)
-p first.length
-
-
+first.append(3)
+first.reverse
+p first
 
 
 

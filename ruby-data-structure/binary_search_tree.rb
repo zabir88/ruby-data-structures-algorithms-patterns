@@ -13,7 +13,7 @@ end
 class BinarySearhTree
   attr_accessor :root
   
-  def initialize(val = nil)
+  def initialize(val)
     @root = Node.new(val)
   end
 

@@ -33,7 +33,7 @@ module SearchAlgorithm
         right = mid + 1
         while(true)
           if(left < first && right > last)
-            return -1
+            return nil
           elsif(right <= last && arr[right] != '')
             mid = right
             break
@@ -51,6 +51,8 @@ module SearchAlgorithm
         last = mid - 1
       elsif(el == ar[mid])
         return "position #{mid}"
+      else
+        return nil
       end
     end
   end 

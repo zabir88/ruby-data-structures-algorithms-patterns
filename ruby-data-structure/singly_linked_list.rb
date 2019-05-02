@@ -56,9 +56,8 @@ class HeadOnlySinglyLinkedList
   def prepend(val)
     node = Node.new(val)
     return @head = node if @head == nil
-    prev_head = @head
+    node.next = @head
     @head = node
-    @head.next = prev_head
   end
 
   def shift
@@ -122,14 +121,13 @@ class HeadOnlySinglyLinkedList
   def reverse
     previous_node = nil
     current_node = @head
-    next_node = nil
     while(current_node != nil) 
       next_node = current_node.next
       current_node.next = previous_node
       previous_node = current_node
       current_node = next_node
     end
-    previous_node
+    @head = previous_node
   end 
 
   def is_empty?
@@ -151,8 +149,7 @@ end
 first = HeadOnlySinglyLinkedList.new
 first.append(1)
 first.append(2)
-first.append(3)
-p first.reverse
+first.prepend(3)
 p first
 
 
