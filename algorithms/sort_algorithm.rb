@@ -46,7 +46,7 @@ module SortAlgorithm
       key = arr[i].split(//).sort.join # O(nlogn)
       result[key] << arr[i]  # O(n)
     end
-    result.values
+    result
   end
   ################################################################
 
@@ -60,17 +60,13 @@ module SortAlgorithm
     while(low < high)
       if( arr[low] + arr[high] > target)
         high -= 1 
-        indices = [low, high]
       elsif(arr[low] + arr[high] < target)
         low += 1
-        indices = [low, high]
-      end
-
-      if(arr[low] + arr[high] == target)
-        return indices
+      else
+        return [low, high]
       end
     end
-    return "Not Found"
+    nil
   end
   ################################################################
 
@@ -98,5 +94,6 @@ module SortAlgorithm
   end
 end
 
-p SortAlgorithm.sum_two_elements_equal_to_target([1,2,3], 4)
+# p SortAlgorithm.group_anagrams(['cat', 'first', 'tac', 'cinema', 'act', 'iceman', 'last'])
+p SortAlgorithm.sum_two_elements_equal_to_target([1,2,3,5], 6)
 

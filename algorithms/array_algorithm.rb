@@ -46,7 +46,7 @@ module ArrayAlgorithm
     # Optmized Solution
     # Data Structure: Array
     # Time Coplexity: O(n)
-    # Space Coplexity: O(1)
+    # Space Coplexity: O(n)
     arr = sentence.split
     front, back = 0, arr.length-1
     while(front < back)
@@ -98,7 +98,7 @@ module ArrayAlgorithm
     if(arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0] && arr[0][2] == arr[2][0])
       return true
     end
-    return false
+    false
   end
   ################################################################
   
@@ -142,25 +142,32 @@ module ArrayAlgorithm
     end
   end
   ################################################################
-  
-  def self.find_intersection_between_arrays(arr1, arr2)
-    # Brute force solution: Loop through 3 arrays and save the result in a new array
-    # Time Complexity: O(n^3)
-    # Space Complexity: O(n)
-    
-    # Optimized Solution
-    # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    arr1 = arr1.uniq
-    arr2 = arr2.uniq
-    output = Hash.new(0)
-    arr1.each {|i| output[i] += 1}
-    arr2.each {|i| output[i] += 1}
-    output.select{|k| output[k] > 1}.keys
+
+  def self.find_equilibrium_index(arr)
+    # Time complexity: O(n)
+    # Space complexty: O(1)
+
+    sum_right = 0
+    sum_left = 0
+    for i in 1..arr.length-1
+      sum_right += arr[i]
+    end
+    i = 0
+    j = 1
+    while j < arr.length-1
+      sum_right -= arr[j]
+      sum_left += arr[i]
+      if sum_left == sum_right
+        return j
+      end
+      i += 1
+      j += 1
+    end
+    nil
   end
   ################################################################
 
 end
 
-p ArrayAlgorithm.find_intersection_between_arrays([1,2,2,1], [2,2])
+p ArrayAlgorithm.find_equilibrium_index([1,4,2,5])
 

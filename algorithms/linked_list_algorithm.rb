@@ -1,4 +1,4 @@
-require '../ruby-data-structure/singly_linked_list'
+require '../data-structure/singly_linked_list'
 # require '../ruby-data-structure/doubly_linked_list'
 require 'byebug'
 
@@ -7,21 +7,15 @@ module LinkedListAlgorithm
   # Data Structure: Singly Linked List
   # Time Complexity: O(n)
   # Space Complexity: O(n)
-  def self.add_two_numbers_as_linked_list(l1 = SinglyLinkedList.new,l2 = SinglyLinkedList.new)
-    l1.append(2)
-    l1.append(6)
-    l1.append(1)
-    l2.append(7)
-    l2.append(2)
-    l2.append(1)
+  def self.add_two_numbers_as_linked_list(l1, l2)
     result_list = SinglyLinkedList.new
     length = l1.length > l2.length ? l1.length : l2.length 
     carry = 0
     
     while(length > 0)
-      a = l1.shift 
-      b = l2.shift 
-      sum = a + b + carry
+      a = l1.pop 
+      b = l2.pop 
+      sum = a.value + b.value + carry
       if(sum > 9)
         sum = 0 
         carry = 1
@@ -31,7 +25,7 @@ module LinkedListAlgorithm
       result_list.append(sum)
       length -= 1    
     end
-    result_list.head
+    result_list.reverse
   end
   ################################################################
 
@@ -113,13 +107,15 @@ module LinkedListAlgorithm
   ################################################################
 end
 
-# single_list = SinglyLinkedList.new
-# single_list.append(1)
-# single_list.append(2)
-# single_list.append(3)
-# single_list.append(4)
-# single_list.append(5)
+l1 = SinglyLinkedList.new
+l2 = SinglyLinkedList.new
+l1.append(2)
+l1.append(4)
+l1.append(3)
+l2.append(5)
+l2.append(6)
+l2.append(4)
 
-p LinkedListAlgorithm.add_two_numbers_as_linked_list
+p LinkedListAlgorithm.add_two_numbers_as_linked_list(l1, l2)
 
 

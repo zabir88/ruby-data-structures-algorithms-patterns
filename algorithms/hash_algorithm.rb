@@ -55,7 +55,7 @@ module HashAlgorithm
     # Space Complexity: O(n)
     store = Hash.new
     output = ''
-    i, j = 0, 0, 0
+    i, j = 0, 0
     while( j < str.length)
       if(store.has_key?(str[j]) == false)
         store[str[j]] = j
@@ -71,7 +71,7 @@ module HashAlgorithm
     if str[i..j].length > output.length
       output = str[i..j]
     end
-    output.length
+    output
   end
   ################################################################
   
@@ -81,13 +81,12 @@ module HashAlgorithm
     # Space Coplexity: O(n)
     store = {}
     for i in 0..arr.length-1
-      temp = target - arr[i]
-      if(store.has_key?(temp))
-        return "#{temp} & #{arr[i]}"
+      if(store.has_key?(target - arr[i]))
+        return "#{target - arr[i]} & #{arr[i]}"
       end
       store[arr[i]] = i
     end
-    "not found"
+    nil
   end
   ################################################################
   
@@ -97,10 +96,9 @@ module HashAlgorithm
     # Space Coplexity: O(n)
     for i in 0..arr.length-2
       store = {}
-      current_sum = target - arr[i]
       for j in i+1..arr.length-1
-        if store.has_key?(current_sum - arr[j]) 
-          return "#{current_sum - arr[j]}, #{arr[i]}, #{arr[j]}"
+        if store.has_key?(target - arr[i] - arr[j]) 
+          return "#{target - arr[i] - arr[j]}, #{arr[i]}, #{arr[j]}"
         end
         store[arr[j]] = j
       end
@@ -110,19 +108,39 @@ module HashAlgorithm
   ################################################################
   
   def self.subarray_with_a_given_sum(arr, target)
+    # Optimized Solution
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
     store = {}
     current_sum = 0
     for i in 0..arr.length-1
-      current_sum = current_sum + arr[i]
+      current_sum += arr[i]
       if(current_sum == target)
         return arr[0..i]
       end
-      if (store.has_key?(current_sum-target) )
-        return arr[store[current_sum - target] + 1..i]
+      if (store.has_key?(current_sum - target) )
+        return arr[store[current_sum - target]+1..i]
       end
       store[current_sum] = i
     end
     
+  end
+  ################################################################
+  
+  def self.find_intersection_between_arrays(arr1, arr2)    
+    # Brute force solution: Loop through 3 arrays and save the result in a new array
+    # Time Complexity: O(n^3)
+    # Space Complexity: O(n)
+    
+    # Optimized Solution
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    arr1 = arr1.uniq
+    arr2 = arr2.uniq
+    output = Hash.new(0)
+    arr1.each {|i| output[i] += 1}
+    arr2.each {|i| output[i] += 1}
+    output.select{|k| output[k] > 1}.keys
   end
   ################################################################
 

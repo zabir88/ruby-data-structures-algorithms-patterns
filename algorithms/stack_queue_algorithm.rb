@@ -1,5 +1,5 @@
 require 'byebug'
-require_relative '../ruby-data-structure/doubly_linked_list_with_tail'
+require_relative '../data-structure/doubly_linked_list_with_tail'
 
 module StackQueueAlgorithm
   
@@ -87,7 +87,7 @@ module StackQueueAlgorithm
     s2 = []
     while(s1.length != 0)
       tmp = s1.pop
-      while(s2.empty? == false && s2.last > tmp)
+      while(s2.length != 0 && s2.last > tmp)
         s1.push(s2.pop)
       end
       s2.push(tmp)

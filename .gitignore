@@ -1,4 +1,4 @@
 # Ignore Byebug command history file.
-/ruby-algorithms/.byebug_history
-/ruby-data-structure/.byebug_history
-/ruby-patterns/.byebug_history
+/algorithms/.byebug_history
+/data-structure/.byebug_history
+/patterns/.byebug_history

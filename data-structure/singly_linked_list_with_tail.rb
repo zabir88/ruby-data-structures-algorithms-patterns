@@ -1,38 +1,48 @@
-###### Big O #########
+###### Array #########
 # append: O(n)
+# pop: O(1)
+# prepend: O(n) 
+# shift: O(n)
+# access element: O(1)
+# insert element: O(n)
+# delete element: O(n)
+# search : O(n)
+
+###### Singly Linked List #########
+# append: O(1)
 # pop: O(n)
 # prepend: O(1) 
 # shift: O(1)
+# access element: O(n)
 # insert element: O(n)
 # delete element: O(n)
-# find element: O(n)
-# reverse list: O(n)
+# find : O(n)
+
 class Node
   attr_accessor :value, :next
-  
   def initialize(val = nil)
-    @value = val
-    @next = nil
+      @value = val
+      @next = nil
   end
 end
 
-class HeadOnlySinglyLinkedList
-  attr_reader :head
-  
+class SinglyLinkedListWithTail
+  attr_reader :head, :tail
+
   def initialize
     @head = nil
+    @tail = @head
   end
 
   def append(val)
-    node = Node.new(val)
-    if(@head == nil) 
-      @head = node
+    if(@head == nil)
+      @head = Node.new(val)
+      @tail = @head
     else
-      current_node = @head
-      while(current_node.next != nil)
-        current_node = current_node.next
-      end
-      current_node.next = node
+      node = Node.new(val)
+      @tail.next = node
+      # update tail
+      @tail = node
     end
   end
 
@@ -43,6 +53,7 @@ class HeadOnlySinglyLinkedList
     # single element in list
     if(current_node.next == nil)
       @head = nil
+      @tail = @head
       return current_node
     end
     while(current_node.next != nil)
@@ -50,25 +61,33 @@ class HeadOnlySinglyLinkedList
       current_node = current_node.next
     end
     previous_node.next = nil
+    # update tail
+    @tail = previous_node
     current_node
   end
 
   def prepend(val)
     node = Node.new(val)
-    return @head = node if @head == nil
-    node.next = @head
-    @head = node
+    if @head == nil
+      @head = node
+      @tail = @head
+    else
+      node.next = @head
+      @head = node
+    end
   end
 
   def shift
-    return @head = nil if @head == nil
+    return nil if @head == nil
+    prev_head = @head
     @head = @head.next
+    prev_head
   end
 
   def insert(val, index)
     node = Node.new(val)
-    ind = 0
     current_node = @head
+    ind = 0
     while(ind != index)
       previous_node = current_node
       current_node = current_node.next
@@ -77,27 +96,27 @@ class HeadOnlySinglyLinkedList
     previous_node.next = node
     node.next = current_node
   end
-  
+
   def delete(val)
     current_node = @head
     # if list is empty
-    return nil if @head == nil
-    # if value is the first element in the list
-    if current_node.value == val
+    return nil if current_node == nil
+    # if value is the first element
+    if(current_node.value == val)
       self.shift
       return current_node
     end
     while(current_node.next != nil)
-      if(current_node.value == val)
+      if(current_node.value == val) 
         break
       end
       previous_node = current_node
       current_node = current_node.next
     end
-    # if value not found in the list
+    # value not found
     return nil if current_node == nil
-    # if last element in the list
-    if (current_node.next == nil)
+    # if value is the last element in the list
+    if current_node.next == nil
       self.pop
       return current_node
     end
@@ -110,29 +129,32 @@ class HeadOnlySinglyLinkedList
     return nil if @head == nil
     current_node = @head
     while(current_node.next != nil)
-      if(current_node.value == val)
+      if (current_node.value == val)
         return current_node
       end
       current_node = current_node.next
     end
     nil
   end
-  
+
   def reverse
-    previous_node = nil
+    prev_node = nil
     current_node = @head
-    while(current_node != nil) 
+    new_tail = @head
+    while(current_node != nil)
       next_node = current_node.next
-      current_node.next = previous_node
-      previous_node = current_node
+      current_node.next = prev_node
+      prev_node = current_node
       current_node = next_node
     end
-    @head = previous_node
-  end 
+    new_tail.next = nil
+    @head = prev_node
+    @tail = new_tail
+  end
 
   def is_empty?
     @head == nil ? true : false
-  end 
+  end
 
   def length
     return 0 if @head == nil
@@ -145,13 +167,9 @@ class HeadOnlySinglyLinkedList
     count
   end
 end
-
-first = HeadOnlySinglyLinkedList.new
+first = SinglyLinkedList.new
 first.append(1)
 first.append(2)
-first.prepend(3)
+first.append(3)
+first.reverse
 p first
-
-
-
-
