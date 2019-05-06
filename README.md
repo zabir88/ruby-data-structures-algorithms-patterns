@@ -1,1 +1,3 @@
-# Implementation of some common Data Structures, Algorithms and Class Patterns in Ruby. 
+# Ruby Basics
+
+Implementation of some common Data Structures, Algorithms, System Design and Class Patterns in Ruby.

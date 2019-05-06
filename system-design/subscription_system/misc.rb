@@ -1,19 +1,6 @@
 require 'date'
 require './subscription_system'
-
-# Seed Data
-customer_1 = Customer.create!(name: 'zabir', activated_on: '01/01/2019', deactivated_on: nil)
-customer_2 = Customer.create!(name: 'munira', activated_on: '01/01/2019', deactivated_on: nil)
-customer_3 = Customer.create!(name: 'zeenat', activated_on: '01/01/2019', deactivated_on: '04/30/2019')
-customer_4 = Customer.create!(name: 'jesmnina', activated_on: '01/01/2019', deactivated_on: nil)
-sub_plan_1 = SubscriptionPlan.create!(name: 'basic', price: 5)
-sub_plan_2 = SubscriptionPlan.create!(name: 'premium', price: 10)
-subs_1 = Subscription.create!(customer_id: 1, subscription_plan_id: 2, started_on: '01/01/2019', ended_on: nil) 
-subs_2 = Subscription.create!(customer_id: 2, subscription_plan_id: 1, started_on: '01/01/2019', ended_on: nil) 
-subs_3 = Subscription.create!(customer_id: 3, subscription_plan_id: 1, started_on: '01/01/2019', ended_on: '04/30/2019') 
-subs_4 = Subscription.create!(customer_id: 4, subscription_plan_id: 1, started_on: '01/01/2019', ended_on: nil)
-
-# module Billing
+# module Misc
 #   def self.monthly_grand_total(price, user_arr, month='2019-01')
 #     # find total for each day of the month for all active uers
 #     # sum all total of each day of the current month to get the grand total of the month

@@ -1,7 +1,6 @@
-# Binary Search Tree Insert and Depth First Traversal
-
 class Node
   attr_accessor :value, :left_node, :right_node
+  
   def initialize(val)
     @value = val
     @left_node = nil
@@ -11,11 +10,18 @@ end
 
 
 class BinarySearhTree
-  attr_accessor :root
+  attr_reader :root
   
-  def initialize(val)
+  def initialize(value = nil)
     @root = Node.new(val)
   end
+
+  def depth_first_in_order
+  end
+
+  def breadth_first
+  end
+
 
   def insert(node = @root, val)
     if(val > node.value)
@@ -30,7 +36,8 @@ class BinarySearhTree
       else
         insert(node.left_node, val)
       end
-    end 
+    end
+    @root 
   end
 
   def contains?(node = @root, val)
@@ -61,9 +68,6 @@ class BinarySearhTree
   end
 
   def pre_order_traversal
-  end
-
-  def in_order_traversal
   end
 
   def post_order_traversal
