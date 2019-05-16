@@ -26,14 +26,14 @@ module SearchAlgorithm
   def self.sparse_search(arr, el)
     first = 0
     last = arr.length - 1
-    while (first <= last)
+    while first <= last
       mid = (first + last)/2
-      if(arr[mid] == '')
+      if arr[mid] == ''
         left = mid - 1
         right = mid + 1
-        while(true)
+        while true
           if(left < first && right > last)
-            return nil
+            break
           elsif(right <= last && arr[right] != '')
             mid = right
             break
@@ -45,16 +45,15 @@ module SearchAlgorithm
           left -= 1
         end
       end
-      if(el > arr[mid])
+      if el > arr[mid]
         first = mid + 1
-      elsif(el < arr[mid])
+      elsif el < arr[mid]
         last = mid - 1
-      elsif(el == ar[mid])
+      elsif el == ar[mid]
         return "position #{mid}"
-      else
-        return nil
       end
     end
+    nil
   end 
   ################################################################
 

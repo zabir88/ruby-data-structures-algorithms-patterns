@@ -146,7 +146,6 @@ module ArrayAlgorithm
   def self.find_equilibrium_index(arr)
     # Time complexity: O(n)
     # Space complexty: O(1)
-
     sum_right = 0
     sum_left = 0
     for i in 1..arr.length-1
@@ -167,7 +166,35 @@ module ArrayAlgorithm
   end
   ################################################################
 
+  def self.mapping_data_from_two_tables_using_join(user_id_params)
+    # Example use case: user id can be 1,2 or 3
+    # Time complexity: O(n)
+    # Space complexity: O(n)
+
+    designers = {
+      '10' => {:name => 'john', :id => 10}, 
+      '12' => {:name => 'peter', :id => 12}, 
+      '30' => {:name => 'james', :id => 30}, 
+      '25' => {:name => 'loren', :id => 25}
+    }
+    users_designers_join = [
+      {user_id: 1, designer_id: 10},
+      {user_id: 1, designer_id: 12},
+      {user_id: 2, designer_id: 30},
+      {user_id: 3, designer_id: 25},
+      {user_id: 2, designer_id: 25}
+    ]
+
+    following_designers = []
+    for i in users_designers_join
+      if user_id_params == i[:user_id]
+        following_designers << designers[i[:designer_id].to_s]  
+      end
+    end
+    following_designers.map {|i| i[:name]} 
+  end
+  ################################################################
 end
 
-p ArrayAlgorithm.find_equilibrium_index([1,4,2,5])
+p ArrayAlgorithm.mapping_data_from_two_tables_using_join(1)
 

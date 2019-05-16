@@ -90,7 +90,7 @@ module SortAlgorithm
         low += 1
       end
     end
-    return "Not Found"
+    nil
   end
 end
 

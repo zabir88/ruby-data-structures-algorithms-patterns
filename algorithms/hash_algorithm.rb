@@ -47,17 +47,34 @@ module HashAlgorithm
   end
   ################################################################
   
+  def self.find_intersection_between_arrays(arr1, arr2)    
+    # Brute force solution: Loop through 3 arrays and save the result in a new array
+    # Time Complexity: O(n^3)
+    # Space Complexity: O(n)
+    
+    # Optimized Solution
+    # Time Complexity: O(n)
+    # Space Complexity: O(n)
+    arr1 = arr1.uniq
+    arr2 = arr2.uniq
+    output = Hash.new(0)
+    arr1.each {|i| output[i] += 1}
+    arr2.each {|i| output[i] += 1}
+    output.select{|k| output[k] > 1}.keys
+  end
+  ################################################################
+  
   def self.longest_substring(str)
     # Length of longest substring without repitition
     # Optimized Solution
     # Data Structure: Hash Table
     # Time Complexity: O(n)
     # Space Complexity: O(n)
-    store = Hash.new
+    store = {}
     output = ''
     i, j = 0, 0
-    while( j < str.length)
-      if(store.has_key?(str[j]) == false)
+    while j < str.length
+      if store.has_key?(str[j]) == false
         store[str[j]] = j
         j += 1
       else
@@ -81,7 +98,7 @@ module HashAlgorithm
     # Space Coplexity: O(n)
     store = {}
     for i in 0..arr.length-1
-      if(store.has_key?(target - arr[i]))
+      if store.has_key?(target - arr[i])
         return "#{target - arr[i]} & #{arr[i]}"
       end
       store[arr[i]] = i
@@ -124,23 +141,6 @@ module HashAlgorithm
       store[current_sum] = i
     end
     
-  end
-  ################################################################
-  
-  def self.find_intersection_between_arrays(arr1, arr2)    
-    # Brute force solution: Loop through 3 arrays and save the result in a new array
-    # Time Complexity: O(n^3)
-    # Space Complexity: O(n)
-    
-    # Optimized Solution
-    # Time Complexity: O(n)
-    # Space Complexity: O(n)
-    arr1 = arr1.uniq
-    arr2 = arr2.uniq
-    output = Hash.new(0)
-    arr1.each {|i| output[i] += 1}
-    arr2.each {|i| output[i] += 1}
-    output.select{|k| output[k] > 1}.keys
   end
   ################################################################
 
